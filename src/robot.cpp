@@ -41,7 +41,7 @@ std::vector<double> Robot::sense(bool noise = true)
     {
         // get Euclidean distance to each landmark and add noise to simulate range finder data
         double m = std::sqrt(std::pow(lms[i - 1] - x__, 2) + std::pow(lms[i] - y__, 2));
-        noise? true m += get_gaussian_random_number(0.0, sense_noise)
+        noise ? m += get_gaussian_random_number(0.0, sense_noise) : m += 0.0;
         measurements.push_back(m);
     }
 
@@ -83,8 +83,14 @@ double Robot::get_gaussian_random_number(double mean, double var)
 
 double Robot::get_random_number()
 {
-    // get random number from uniform distribution
+    // get random number from a uniform distribution
     std::default_random_engine gen;
     std::uniform_real_distribution<double> dist(0.0, 1.0);
     return dist(gen);
 }
+
+double Robot::get_sensor_noise() { return sense_noise__; }
+
+double Robot::get_x() { return x__; }
+
+double Robot::get_y() { return y__; }

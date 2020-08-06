@@ -23,6 +23,12 @@ public:
     std::vector<double> sense(bool noise = true);
     // Move the robot
     void move(double turn, double forward);
+    // get sensor noise
+    double get_sensor_noise();
+    // get x
+    double get_x();
+    // get y
+    double get_y();
     // Get pose readings
     std::string get_pose();
     // Get sensor readings
