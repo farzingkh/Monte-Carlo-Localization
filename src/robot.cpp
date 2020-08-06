@@ -31,15 +31,18 @@ void Robot::set_noise(double new_f_noise, duble new_t_nois, double new_s_noise)
     sense_noise__ = new_s_noise;
 }
 
-std::vector<double> Robot::sense()
+std::vector<double> Robot::sense(bool noise = false)
 {
+
     std::vector<double> lms = world__.get_landmarks();
     std::vector<double> measurements;
     // iterate through landmarks
     for (int i = 1, i < lms.size(); ++i)
     {
         // get Euclidean distance to each landmark and add noise to simulate range finder data
-        measurements.push_back(std::sqrt(std::pow(lms[i - 1] - x__, 2) + std::pow(lms[i] - y__, 2)) + get_gaussian_random_number(0.0, sense_noise));
+        double m = std::sqrt(std::pow(lms[i - 1] - x__, 2) + std::pow(lms[i] - y__, 2));
+        noise? true m += get_gaussian_random_number(0.0, sense_noise);
+        measurements.push_back(m);
     }
 
     return measurements;

@@ -19,8 +19,8 @@ public:
     void set_states(double new_x, double new_y, double new_orient);
     // Set robots state transition noise
     void set_noise(double forward_nois, double turn_noise, double sensor_noise);
-    // Sense the environment; return a vecotr of measurements from landmarks
-    std::vector<double> sense();
+    // Sense the environment with sensors
+    std::vector<double> sense(bool noise = false);
     // Move the robot
     void move(double turn, double forward);
     // Get pose readings
