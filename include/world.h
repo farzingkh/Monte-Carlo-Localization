@@ -3,16 +3,20 @@
 
 #include <vector>
 
-class world
+class World
 {
 public:
-    void set_landmarks(std::vector<std::vector<double>> landmarks);
-    std::vector<std::vector<double> get_landmarks();
-    int get_size();
+    void set_landmarks(double x, double y);
+    std::vector<double> get_landmarks();
+    
+    int get_x();
+    int get_y();
     
 private:
-    std::vector<std::vector<double>> landmarks__;
-    int size__;
+    std::vector<double> landmarks__;
+    // world size
+    double x__;
+    double y__;
 };
 
 #endif /* WORLD_H */
