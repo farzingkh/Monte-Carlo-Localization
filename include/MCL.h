@@ -1,29 +1,38 @@
 #ifndef MCL_H
 #define MCL_H
 
+struct particle
+{
+    Robot r;
+    double w;
+}
+
+struct command
+{
+    double forward;
+    double turn;
+}
+
 class MCL
 {
 public:
-    MCL(Robot r, world w);  
-    void set_iteration_num(int num);
-    void set_particles_num(int num);
-    // Evaluate the prediction error
-    void evaluate();
-    // Visualize particles and predictions
-    void visualize();
+    MCL(std::vector<particle> X, command U, std::vector<double> Z); 
+    // resample the particles and return the new belief
+    std::vector<particle> resample();
 
 private:
-    // world
-    world w__;
-    // robot model
-    Robot r__;
-    // number of iterations
-    int iterations_num__;
-    // number of particles
-    int particle_num__;
-    // Random Generators
-    std::random_device rd__;
-    mt19937 gen__(rd__());
+    // robot sensor measurements
+    std::vector<double> Z__;
+    // actuation command
+    command U__;
+    // belief
+    std::vector<particle> X__;
+    //maximum weight
+    double max_weight__;
+    // update
+    void motion_update();
+    // predict
+    void sensor_update();
     // Get measurement probability
     double get_measurement_prob(std::vector<double> measurements);
     // Get Gaussian random
