@@ -1,14 +1,15 @@
 #ifndef WORLD_H
-#define WORL_H
+#define WORLD_H
 
 #include <vector>
 
 class World
 {
 public:
+    World(int size_x, int size_y);
     void set_landmarks(double x, double y);
     std::vector<double> get_landmarks();
-    
+
     int get_x();
     int get_y();
     

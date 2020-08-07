@@ -1,6 +1,8 @@
 #include "../include/world.h"
 #include <assert.h>
 
+World::World(int size_x, int size_y) : x__(size_x), y__(size_y) {}
+
 void World::set_landmarks(double x, double y)
 {
     landmarks__.push_back(x);
@@ -14,7 +16,7 @@ std::vector<double> World::get_landmarks()
     return landmarks__;
 }
 
-double World::get_x() { return x__; }
+int World::get_x() { return x__; }
 
-double World::get_y() { return y__; }
+int World::get_y() { return y__; }
 
