@@ -1,14 +1,12 @@
 #ifndef ROBOT_H
-#define ROBO_H
+#define ROBOT_H
 
 #include <vector>
-#include <random>
 #include <string>
 #include <iostream>
 #include <math.h>
 #include <exception>
-
-class World; // forward declaration
+#include "world.h"
 
 class Robot
 {
@@ -18,7 +16,7 @@ public:
     // Set robot's states
     void set_states(double new_x, double new_y, double new_orient);
     // Set robots state transition noise
-    void set_noise(double forward_nois, double turn_noise, double sensor_noise);
+    void set_noise(double forward_noise, double turn_noise, double sensor_noise);
     // Sense the environment with sensors
     std::vector<double> sense(bool noise = true);
     // Move the robot
@@ -35,10 +33,6 @@ public:
     std::string get_sensor_readings();
 
 private:
-    // Get random number from normal distribution given its mean and variance
-    double get_gaussian_random_number(double mean, double var);
-    // get random number between [0,1.0]
-    double get_random_number();
     // robot states
     double x__;
     double y__;
