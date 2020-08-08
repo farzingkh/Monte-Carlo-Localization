@@ -1,17 +1,21 @@
 #ifndef MCL_H
 #define MCL_H
 
+#include "robot.h"
+
 struct particle
 {
+    particle(Robot r, double w);
     Robot r;
     double w;
-}
+};
 
 struct command
 {
+    command(double f, double t);
     double forward;
     double turn;
-}
+};
 
 class MCL
 {
@@ -35,10 +39,7 @@ private:
     void sensor_update();
     // Get measurement probability
     double get_measurement_prob(std::vector<double> measurements);
-    // Get Gaussian random
-    double get_gaussian_random_number(double mean, double var);
-    // Get normal distribution probability of x given mean and variance
-    double get_gaussian_probability(double mean, double var, double x);
+
 };
 
 #endif /* MCL_H */
