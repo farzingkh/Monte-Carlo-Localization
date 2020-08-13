@@ -2,6 +2,8 @@
 #define UTILITY_H
 
 #include <vector>
+#include "../cvplot/include/cvplot/cvplot.h"
+#include <opencv2/opencv.hpp>
 
 class World;
 struct particle;
