@@ -94,13 +94,13 @@ void utility::visualization(Robot *robot, int step, std::vector<particle> *belie
     //Draw landmarks in red
     data.clear();
     std::vector<double> lm = w->get_landmarks();
-    //std::cout << "Landmark size: " << lm.size() << std::endl;
-    for (int i = 1; i < sizeof(lm) / sizeof(lm[0]); ++i)
+    for (int i = 1; i < lm.size(); i += 2)
     {
         data.push_back({lm[i - 1], lm[i]});
     }
     figure.series("Landmarks").set(data).type(cvplot::Dots).color(cvplot::Red);
 
-    //Save the image and close the plot
+    //Show the plot
     cvplot::figure(name).show();
+
 }

@@ -35,7 +35,7 @@ std::vector<double> Robot::sense(bool noise)
     std::vector<double> lms = world__.get_landmarks();
     std::vector<double> measurements;
     // iterate through landmarks
-    for (int i = 1; i < lms.size(); ++i)
+    for (int i = 1; i < lms.size(); i += 2)
     {
         // get Euclidean distance to each landmark and add noise to simulate range finder data
         double m = sqrt(pow((lms[i - 1] - x__), 2) + pow((lms[i] - y__), 2));
