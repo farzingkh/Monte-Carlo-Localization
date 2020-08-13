@@ -18,16 +18,15 @@ int main()
     // create a robot
     Robot R(w);
     // set robot noise
-    R.set_noise(5.0, 0.1, 5.0);
+    R.set_noise(0.2, 0.1, 3.0);
     // set robot position inside the world
-    R.set_states(30.0, 30.0, M_PI / 2.0);
+    R.set_states(20.0, 20.0, M_PI / 2.0);
     std::cout << R.get_pose() << std::endl;
     //std::cout << R.get_sensor_readings() << std::endl;
     // create control command
-    command u(15.0, -M_PI / 2.0);
+    command u(10.0, -M_PI / 2.0);
     // move the robot
     R.move(u.turn, u.forward);
-
     std::cout << R.get_pose() << std::endl;
     //std::cout << R.get_sensor_readings() << std::endl;
 
@@ -43,7 +42,7 @@ int main()
     int NUMBER_OF_ITERATIONS = 50;
 
     // create control command
-    command u1(0.5, 5.0);
+    command u1(0.5, 0.1);
 
     // resample
     for (int i = 0; i < NUMBER_OF_ITERATIONS; ++i)
@@ -52,6 +51,7 @@ int main()
         R.move(u1.turn, u1.forward);
         // get sensor measurements
         std::vector<double> z = R.sense();
+        std::cout << R.get_pose() << std::endl;
         // mcl
         std::vector<particle> belief = MCL(p, u1, z).resample();
         std::cout << "[Error]" << utility::evaluation(&R, &belief, &w) << std::endl;
