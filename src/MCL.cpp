@@ -58,7 +58,6 @@ std::vector<particle> MCL::resample()
     double beta = 0.0;
     for (int i = 0; i < X__.size(); ++i)
     {
-        std::cout << max_weight__ << std::endl;
         beta += utility::get_random_number() * 2 * max_weight__;
         while (beta > X__[index].w)
         {
