@@ -161,10 +161,10 @@ namespace cvplot
     bool aspect_square_;
     int grid_size_;
     int grid_padding_;
-    float x_min;
-    float y_min;
-    float x_max;
-    float y_max;
+    float xx_min;
+    float yy_min;
+    float xx_max;
+    float yy_max;
     bool axis_defined;
   };
 

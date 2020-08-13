@@ -652,10 +652,10 @@ namespace cvplot
 
   Figure &Figure::setAxes(float x_min, float y_min, float x_max, float y_max)
   {
-    this->x_min = x_min;
-    this->y_min = y_min;
-    this->x_max = x_max;
-    this->y_max = y_max;
+    xx_min = x_min;
+    yy_min = y_min;
+    xx_max = x_max;
+    yy_max = y_max;
     axis_defined = true;
     return *this;
   }
@@ -860,20 +860,17 @@ namespace cvplot
   {
     auto n_max = 0;
     auto p_max = grid_padding_;
+    auto x_min = xx_min;
+    auto x_max = yy_min;
+    auto y_min = xx_max;
+    auto y_max = yy_max;
 
     if (axis_defined == false)
     {
-      auto x_min = (include_zero_x_ ? 0.f : FLT_MAX);
-      auto x_max = (include_zero_x_ ? 0.f : FLT_MIN);
-      auto y_min = (include_zero_y_ ? 0.f : FLT_MAX);
-      auto y_max = (include_zero_y_ ? 0.f : FLT_MIN);
-    }
-    else
-    {
-      auto x_min = this->x_min;
-      auto x_max = this->y_min;
-      auto y_min = this->x_max;
-      auto y_max = this->y_max;
+      x_min = (include_zero_x_ ? 0.f : FLT_MAX);
+      x_max = (include_zero_x_ ? 0.f : FLT_MIN);
+      y_min = (include_zero_y_ ? 0.f : FLT_MAX);
+      y_max = (include_zero_y_ ? 0.f : FLT_MIN);
     }
 
     // find value bounds
