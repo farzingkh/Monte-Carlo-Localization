@@ -10,7 +10,7 @@ int main()
     // create landmarks positions
     double landmarks[16] = {20.0, 20.0, 20.0, 80.0, 20.0, 50.0, 50.0, 20.0, 50.0, 80.0, 80.0, 80.0, 80.0, 20.0, 80.0, 50.0};
     // set world landmarks
-    for (int i = 1; i < sizeof(landmarks) / sizeof(landmarks[0]); ++i)
+    for (int i = 1; i < sizeof(landmarks) / sizeof(landmarks[0]); i += 2)
     {
         w.set_landmarks(landmarks[i - 1], landmarks[i]);
     }
@@ -20,7 +20,7 @@ int main()
     // set robot noise
     R.set_noise(0.2, 0.1, 3.0);
     // set robot position inside the world
-    R.set_states(20.0, 20.0, M_PI / 2.0);
+    R.set_states(40.0, 40.0, M_PI / 2.0);
     std::cout << R.get_pose() << std::endl;
     //std::cout << R.get_sensor_readings() << std::endl;
     // create control command
@@ -39,7 +39,7 @@ int main()
     }
 
     // set number of iterations for mcl
-    int NUMBER_OF_ITERATIONS = 50;
+    int NUMBER_OF_ITERATIONS = 100;
 
     // create control command
     command u1(0.5, 0.1);
