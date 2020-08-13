@@ -1,13 +1,10 @@
 #include "../include/utility.h"
 #include "../include/world.h"
 #include "../include/MCL.h"
-#include "../include/matplotlibcpp.h" //Graph Library
 
 #include <iostream>
 #include <math.h>
 #include <random>
-
-namespace plt = matplotlibcpp;
 
 double utility::get_gaussian_random_number(double mean, double var)
 {
@@ -55,37 +52,55 @@ double utility::evaluation(Robot *r, std::vector<particle> *p, World *world)
 
 void utility::visualization(Robot *robot, int step, std::vector<particle> *belief, std::vector<particle> *new_belief, World *w)
 {
-    //Draw the robot, landmarks, particles and resampled particles on a graph
+    float x_min = 0.0;
+    float y_min = 0.0;
+    float x_max = 100.0;
+    float y_max = 100.0;
+
+    //Draw cvplot scatter plot for the robot, landmarks, particles and resampled particles on a graph
     int n = belief->size();
+    std::vector<std::pair<float, float>> data;
 
     //Graph Format
-    plt::title("MCL, step " + std::to_string(step));
-    plt::xlim(0, 100);
-    plt::ylim(0, 100);
-
-    //Draw particles in green
-    for (int i = 0; i < n; i++)
-    {
-        plt::plot({(*belief)[i].r.get_x()}, {(*belief)[i].r.get_y()}, "go");
-    }
-
-    //Draw resampled particles in yellow
-    for (int i = 0; i < n; i++)
-    {
-        plt::plot({(*new_belief)[i].r.get_x()}, {(*new_belief)[i].r.get_y()}, "yo");
-    }
-
-    //Draw landmarks in red
-    std::vector<double> lm = w->get_landmarks();
-    for (int i = 1; i < sizeof(lm) / sizeof(lm[0]); ++i)
-    {
-        plt::plot({lm[i - 1]}, {lm[i]}, "ro");
-    }
+    auto name = "MCL";
+    cvplot::setWindowTitle(name, "step" + std::to_string(step));
+    cvplot::moveWindow(name, 0, 0);
+    cvplot::resizeWindow(name, 800, 600);
+    auto &figure = cvplot::figure(name);
+    figure.origin(true, true);
+    figure.setAxes(x_min, y_min, x_max, y_max);
 
     //Draw robot position in blue
-    plt::plot({robot->get_x()}, {robot->get_y()}, "bo");
+    data.clear();
+    data.push_back({robot->get_x(), robot->get_y()});
+    figure.series("Robot").set(data).type(cvplot::Dots).color(cvplot::Black);
+
+    //Draw resampled particles in yellow
+    data.clear();
+    for (auto i = 0; i < n; i++)
+    {
+        data.push_back({(*new_belief)[i].r.get_x(), (*new_belief)[i].r.get_y()});
+    }
+    figure.series("Resampled Particles").set(data).type(cvplot::Dots).color(cvplot::Yellow);
+
+    //Draw particles in green
+    data.clear();
+    for (auto i = 0; i < n; i++)
+    {
+        data.push_back({(*belief)[i].r.get_x(), (*belief)[i].r.get_y()});
+    }
+    figure.series("Particles").set(data).type(cvplot::Dots).color(cvplot::Green);
+
+    //Draw landmarks in red
+    data.clear();
+    std::vector<double> lm = w->get_landmarks();
+    //std::cout << "Landmark size: " << lm.size() << std::endl;
+    for (int i = 1; i < sizeof(lm) / sizeof(lm[0]); ++i)
+    {
+        data.push_back({lm[i - 1], lm[i]});
+    }
+    figure.series("Landmarks").set(data).type(cvplot::Dots).color(cvplot::Red);
 
     //Save the image and close the plot
-    plt::save("./Images/Step" + std::to_string(step) + ".png");
-    plt::clf();
+    cvplot::figure(name).show();
 }
