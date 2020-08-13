@@ -40,7 +40,7 @@ make
 ```
 
 ### Output
-
+![output](./Images/out.gif)
 
 
 ### References
