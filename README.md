@@ -1,7 +1,7 @@
 
 
 # Monte-Carlo-Localization
-Simple C++ implementation of Monte-Carlo localization with particle filter. The resampling of the particles is done using the resampling wheel algorithm by Thrun et al.
+C++ implementation of Monte-Carlo localization and particle filter. The resampling of the particles is done using Stochastic universal sampling with equal spacing at 2 times the maximum weight of the particles.
 
 ### Compiling the Program
 
@@ -47,4 +47,7 @@ make
 
  - Ioannis M. Rekleitis. ["A Particle Filter Tutorial for Mobile Robot Localization."](http://www.cim.mcgill.ca/~yiannis/particletutorial.pdf) Centre for Intelligent Machines, McGill University, Tech. Rep. TR-CIM-04-02 (2004).
  - [Probabilistic Robotics.](https://mitpress.mit.edu/books/probabilistic-robotics) Sebastian Thrun, Wolfram Burgard, and Dieter Fox. (2005, MIT Press.) 647 pages
+ - Wolfram Burgard, [Introduction to Mobile Robotics
+Bayes Filter – Particle Filter and Monte Carlo Localization
+](https://people.eecs.berkeley.edu/~pabbeel/cs287-fa19/slides/Lec14-particle-filters.pdf)
 
