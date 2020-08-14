@@ -5,8 +5,8 @@ C++ implementation of Monte-Carlo localization and particle filter. Particles re
 
  - __Particle Generation__: Particles are generated representing the robot with random pose uniformly distributed inside the map.
  - __Motion Update__: Particles are propogated based on the model of the system and motion model in case of localization
- - __Measurement Update__: Then they are weighted based on the likelihood of observations
- - __Resampling__: Resamplig ensures that particles stay in the meaningful areas of the state space. New particles are drawn from the set of particles with a probability proportional to the likelihood of their observations. In case of the example implementation The resampling of the particles is done in a way similar to _Stochastic universal sampling_ with equal spacing at 2 times the maximum weight of the particles. 
+ - __Sensor Update__: Given the sensor readings of the robot and measurements from the known map particles are weighted based on the likelihood of observations
+ - __Resampling__: Resampling results in the updated belief of the system state. Resamplig ensures that particles stay in the meaningful areas of the state space. New particles are drawn from the set of particles with a probability proportional to the likelihood of their observations. In case of the example implementation The resampling of the particles is done in a way similar to _Stochastic universal sampling_ with equal spacing at 2 times the maximum weight of the particles. 
 
 
 ### Compiling the Program
