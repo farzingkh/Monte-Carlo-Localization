@@ -1,7 +1,13 @@
 
 
 # Monte-Carlo-Localization
-C++ implementation of Monte-Carlo localization and particle filter. The resampling of the particles is done using Stochastic universal sampling with equal spacing at 2 times the maximum weight of the particles.
+C++ implementation of Monte-Carlo localization and particle filter. Particles represent the posterior by a set of weighted samples. They can model arbitrary distributions and therefore are used when measurement or prediction distributions are non-Gausian. The localization can be summerized as follows:
+
+ - __Particle Generation__: Particles are generated representing the robot with random pose uniformly distributed inside the map.
+ - __Motion Update__: Particles are propogated based on the model of the system and motion model in case of localization
+ - __Measurement Update__: Then they are weighted based on the likelihood of observations
+ - __Resampling__: Resamplig ensures that particles stay in the meaningful areas of the state space. New particles are drawn from the set of particles with a probability proportional to the likelihood of their observations. In case of the example implementation The resampling of the particles is done in a way similar to _Stochastic universal sampling_ with equal spacing at 2 times the maximum weight of the particles. 
+
 
 ### Compiling the Program
 
